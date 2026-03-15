@@ -1,67 +1,53 @@
-// ======================
-// card face
-// ======================
-function flipCard(){
-document.getElementById("card").classList.add("flip");
-}
-// ======================
-// card back
-// ======================
-function resetCard(){
+function startOrder(){
 
-document.getElementById("card").classList.remove("flip");
+let name = prompt("Enter your name");
 
-document.getElementById("result").innerHTML="";
+// call the function
+let gender = askGender();
 
-document.getElementById("name").value="";
-document.getElementById("drinkName").value="";
-document.getElementById("gender").value="";
-document.getElementById("drinkType").value="";
+let drinkType = prompt("Hot or Cold drink?");
 
-}
-// ======================
-//order massage status
-// ======================
-function submitOrder(){
+let drinkName = prompt("Enter drink name");
 
-let name = document.getElementById("name").value;
-let gender = document.getElementById("gender").value;
-let drinkType = document.getElementById("drinkType").value;
-let drinkName = document.getElementById("drinkName").value;
+// save answers in array
+let order = [name, gender, drinkType, drinkName];
 
-let title="";
-
-if(gender==="male"){
-title="Mr";
-}
-else if(gender==="female"){
-title="Mrs";
+// for loop to print array
+for(let i = 0; i < order.length; i++){
+console.log(order[i]);
 }
 
-let receipt = `
-<h3>☕ Order Receipt</h3>
+let title = "";
 
-<p><strong>Welcome:</strong> ${title} ${name}</p>
+if(gender === "male"){
+title = "Mr";
+}
+else{
+title = "Mrs";
+}
 
-<hr>
+let receipt =
+"☕ Order Receipt\n\n" +
+"Welcome: " + title + " " + name + "\n\n" +
+"Status: Preparing your order...\n\n" +
+"Drink Type: " + drinkType + "\n" +
+"Drink Name: " + drinkName + "\n\n" +
+"Thank you ❤️";
 
-<p><strong>Status:</strong> Preparing your order...</p>
-
-<p><strong>Drink Type:</strong> ${drinkType}</p>
-
-<p><strong>Drink Name:</strong> ${drinkName}</p>
-
-<p style="text-align:center;margin-top:10px;">Thank you ❤️</p>
-`;
-
-document.getElementById("receiptContent").innerHTML = receipt;
-
-document.getElementById("receiptPopup").style.display="flex";
-
-console.log(name+" ordered "+drinkType+" "+drinkName);
+alert(receipt);
 
 }
 
-function closeReceipt(){
-document.getElementById("receiptPopup").style.display="none";
+
+// function for gender question
+function askGender(){
+
+let gender = prompt("Enter your gender (male / female)");
+
+while(gender !== "male" && gender !== "female"){
+gender = prompt("Please enter a correct gender (male / female)");
+}
+
+return gender;
+
 }
